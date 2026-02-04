@@ -1191,14 +1191,12 @@ static void do_fat_boot(u32 type, u32 port)
 
 	run_draminit();
 
-	if (fat_sdcard_check_boot_mode(&g_finfo) == TRUE) {
-		if (type == SDCARD_ISP) {
-			g_bootinfo.gbootRom_boot_mode = SDCARD_BOOT;
-			type = SDCARD_BOOT;
-		} else if (type == USB_ISP) {
-			g_bootinfo.gbootRom_boot_mode = USB_BOOT;
-			type = USB_BOOT;
-		}
+	if ((type == SDCARD_ISP) && (fat_sdcard_check_boot_mode(&g_finfo) == TRUE)) {
+		g_bootinfo.gbootRom_boot_mode = SDCARD_BOOT;
+		type = SDCARD_BOOT;
+	} else if ((type == USB_ISP) && (fat_usb_check_boot_mode(&g_finfo) == TRUE)) {
+		g_bootinfo.gbootRom_boot_mode = USB_BOOT;
+		type = USB_BOOT;
 	}
 
 	if ((type == SDCARD_ISP) || (type == USB_ISP)) {

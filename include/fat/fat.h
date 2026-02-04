@@ -106,6 +106,7 @@ u32 fat_read_file(u32 idx, fat_info *info, u8 *buffer, u32 offset, u32 length, u
 int fat_read_fat_for_training_fw(fat_info *info, u8 *buffer, u32 start_lba);
 u32 lba2sec_for_training_fw(u32 lba);
 u8 fat_sdcard_check_boot_mode(fat_info *info);
+u8 fat_usb_check_boot_mode(fat_info *info);
 
 //int str_cmp(const char *s1, const char *s2, u32 n);
 

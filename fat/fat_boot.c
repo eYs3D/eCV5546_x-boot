@@ -724,3 +724,16 @@ u8 fat_sdcard_check_boot_mode(fat_info *info)
 	return TRUE;
 }
 
+/*usb do isp or boot is decide by ISPBOOOT.BIN size
+  do isp: ISPBOOOT.BIN size > size (16MB);
+  do boot: otherwise;
+  for debug Uboot, do not check file
+*/
+u8 fat_usb_check_boot_mode(fat_info *info)
+{
+	if (info->fileInfo[0].size > 0x1000000) { //16MB
+		dbg_info();
+		return FALSE;
+	}
+	return TRUE;
+}
